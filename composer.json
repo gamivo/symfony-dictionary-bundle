@@ -1,0 +1,15 @@
+{
+    "name": "mrynarzewski/dictionary-bundle",
+    "description": "dictionary bundle",
+    "type": "symfony-bundle",
+    "require": {
+        "symfony/framework-bundle": "*",
+        "doctrine/doctrine-bundle": "*"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Mrynarzewski\\DictionaryBundle\\": ""
+        }
+    }
+}
