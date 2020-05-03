@@ -29,12 +29,13 @@ class DictionaryItemService implements DictionaryItemServiceInterface
         try {
             $result = new DictionaryItem();
             $result->setDictionary($dictionary);
+            $result->setItem($item);
             $result->setDescription($description);
             $result->setExtra($extra);
             $this->entityManager->persist($result);
             $this->entityManager->flush();
         } catch (UniqueConstraintViolationException $e) {
-            throw new $e;
+            throw $e;
         }
 
         return $result;

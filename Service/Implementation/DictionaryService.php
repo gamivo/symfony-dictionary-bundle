@@ -33,7 +33,7 @@ class DictionaryService implements DictionaryServiceInterface
             $this->entityManager->persist($result);
             $this->entityManager->flush();
         } catch (UniqueConstraintViolationException $e) {
-            throw new $e;
+            throw $e;
         }
 
         return $result;
