@@ -2,9 +2,12 @@
 
 namespace Mrynarzewski\DictionaryBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use \Mrynarzewski\DictionaryBundle\Entity\DictionaryItem;
 
 /**
  * @ORM\Entity(repositoryClass="Mrynarzewski\DictionaryBundle\Repository\DictionaryRepository")
@@ -32,11 +35,14 @@ class Dictionary
     private $extra;
 
     /**
-     * @var DictionaryItem[]|PersistentCollection
-     * @ORM\OneToMany(targetEntity="DictionaryItem", mappedBy="dictionary")
+     * @ORM\OneToMany(targetEntity="DictionaryItem", mappedBy="dictionary", orphanRemoval=true, cascade={"remove"})
      */
     private $items;
 
+    public function __construct()
+    {
+        $this->items = new ArrayCollection();
+    }
 
     public function setId(string $id): self
     {
@@ -79,11 +85,20 @@ class Dictionary
     }
 
     /**
-     * @return PersistentCollection|DictionaryItem[]
+     * @return Collection|DictionaryItem[]
      */
-    public function getItems()
+    public function getItems(): Collection
     {
         return $this->items;
     }
 
+    public function addItem(DictionaryItem $item): self
+    {
+        if (!$this->items->contains($item)) {
+            $this->items[] = $item;
+            $item->setDictionary($this);
+        }
+
+        return $this;
+    }
 }
