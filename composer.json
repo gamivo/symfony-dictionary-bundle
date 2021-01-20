@@ -4,7 +4,9 @@
     "type": "symfony-bundle",
     "require": {
         "symfony/framework-bundle": "*",
-        "doctrine/doctrine-bundle": "*"
+        "doctrine/doctrine-bundle": "*",
+        "symfony/validator": "*",
+        "doctrine/annotations": "*"
     },
     "minimum-stability": "dev",
     "autoload": {
