@@ -1,5 +1,5 @@
 {
-    "licence": "MIT",
+    "license": "MIT",
     "name": "mrynarzewski/dictionary-bundle",
     "description": "dictionary bundle",
     "type": "symfony-bundle",
